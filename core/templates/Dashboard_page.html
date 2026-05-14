@@ -1,0 +1,56 @@
+<!-- templates/dashboard.html -->
+{% extends 'Base_page.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+
+        <ul>
+            <li>Home</li>
+            <li>Profile</li>
+            <li>Settings</li>
+            <li>Analytics</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+        <div class="top-card">
+            <h1>Welcome, {{ user.username }}</h1>
+            <p>Your Login System Dashboard</p>
+        </div>
+
+        <div class="card-grid">
+
+            <div class="card">
+                <h3>Total Users</h3>
+                <p>1,250</p>
+            </div>
+
+            <div class="card">
+                <h3>Revenue</h3>
+                <p>$4,500</p>
+            </div>
+
+            <div class="card">
+                <h3>Visitors</h3>
+                <p>12,000</p>
+            </div>
+
+            <div class="card">
+                <h3>Growth</h3>
+                <p>+24%</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

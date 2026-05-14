@@ -1,0 +1,47 @@
+<!-- templates/register.html -->
+{% extends 'Base_page.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="form-box">
+
+        <h2>Create Account</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input-box">
+                <input type="text" name="username" required>
+                <label>Username</label>
+            </div>
+
+            <div class="input-box">
+                <input type="email" name="email" required>
+                <label>Email</label>
+            </div>
+
+            <div class="input-box">
+                <input type="password" name="password1" required>
+                <label>Password</label>
+            </div>
+
+            <div class="input-box">
+                <input type="password" name="password2" required>
+                <label>Confirm Password</label>
+            </div>
+
+            <button type="submit" class="btn">Register</button>
+
+            <p class="switch-text">
+                Already have an account?
+                <a href="{% url 'signup' %}">Login</a>
+            </p>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
