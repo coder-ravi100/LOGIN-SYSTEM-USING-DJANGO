@@ -4,6 +4,11 @@ from django.contrib.auth.hashers import make_password, check_password
 
 class User(models.Model):
 
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('teacher', 'Teacher'),
+        ('student', 'Student'),
+    )
     username = models.CharField(max_length = 100)
     email = models.EmailField(unique = True)
     password = models.CharField(max_length = 225)
@@ -13,6 +18,9 @@ class User(models.Model):
 
     def check_password(self,raw_password):
         return check_password(raw_password, self.password)
+    
+    #Role Base Login System IImplement
+    role = models.CharField(max_length = 20, choices = ROLE_CHOICES)
     
     def __str__(self):
         return self.username
