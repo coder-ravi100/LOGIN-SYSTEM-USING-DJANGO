@@ -48,6 +48,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    # CUSTOM MIDDLEWARE
+    'accounts.middleware.AuthMiddleware',
 ]
 
 ROOT_URLCONF = 'zipcode.urls'

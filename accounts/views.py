@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import User
+from django.contrib import messages
+
 # Create your views here.
 def dashboard(request):
     user_id = request.session.get('user_id')
@@ -9,10 +11,16 @@ def dashboard(request):
 
     user = User.objects.get(id=user_id)
 
-    return render(request, 'dashboard.html', {
-        'user': user,
-        'role' : user.role
-    })
+    # return render(request, 'dashboard.html', {
+    #     'user': user,
+    #     'role' : user.role
+    # })
+    messages.success(request, "Accounts Login Successfully..! Welcome Your Dashboard")
+    context = {
+        'user' : user,
+        'role' : user.role,
+    }
+    return render(request, 'Dashboard.html',context)
 
 
 def registration(request):
@@ -20,13 +28,41 @@ def registration(request):
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
-        
         role = request.POST['role']
 
-        user = User(username = username, email = email, role = role)
-
+        user = User(username = username, 
+                    email = email, 
+                    role = role
+                    )
+        # USERNAME VALIDATION
+        if len(username) > 50:
+            messages.error(request, "Username Must Be At Least 3 Characters")
+            return redirect("registration")
+       
+        # EMAIL VALIDATION
+        if User.objects.filter(email=email).exists():
+            messages.error(request,"Email Already Exists")
+            return redirect("registration")
+        
+        # PASSWORD VALIDATION
+        if len(password) < 6:
+            messages.error(request, "Password Must Be At Least 6 Characters")
+            return redirect("registration")
+        
+        #Strong Password Validation
+        if password.isdigit():
+            messages.error(request, "Password Cannot Be Only Numbers")
+            return redirect("registration")
+        
+        if not username.isalnum():
+            messages.error(request, "Username Must Contain Only Letters And Numbers")
+            return  redirect('registration')
+        
+        
         user.set_password(password)
         user.save()
+
+        messages.success(request, "Accounts Successfully..!")
 
         return redirect('login')
     return render(request, 'registration_page.html')
@@ -55,16 +91,23 @@ def login(request):
                     return redirect('dashboard')
                 
             else:
-                return render(request,'login_page.html',{
-                    'error' :'Wrong Password'
-                })
+                # return render(request,'login_page.html',{
+                #     'error' :'Wrong Password'
+                # })
+                messages.error(request, "Wrong Password")
+                return redirect('login')
+                
         except:
-            return render(request, 'login_page.html', {
-                'error' :  'User Not Found'
-            })
+            # return render(request, 'login_page.html', {
+            #     'error' :  'User Not Found'
+            # })
+            messages.error(request,"User Not Found")
+            return redirect('login')
         
+    
     return render(request, 'Login_page.html')
 
 def logout(request):
     request.session.flush()
-    return redirect('/login/')
+    messages.success(request, "Accounts Logout Successfully..!")
+    return redirect('login')
