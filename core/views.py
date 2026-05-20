@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import User
 from django.contrib import messages
-
+from .form import RegistrationForm
 
 # Create your views here.
 def dashboard(request):
@@ -26,50 +26,38 @@ def dashboard(request):
 
 def registration(request):
     
+    form = RegistrationForm()
+
     if request.method == "POST":
-    
-        username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password']
-        role = request.POST['role']
 
-        user = User(username = username, 
-                    email = email, 
-                    role = role
-                    )
-        #USERNAME VALIDATION
-        if len(username) > 50:
-            messages.error(request, "Username Must Be At Least 3 Characters")
-            return redirect("registration")
-    
-        #EMAIL VALIDATION
-        if User.objects.filter(email=email).exists():
-            messages.error(request,"Email Already Exists")
-            return redirect("registration")
-        
-        #PASSWORD VALIDATION
-        if len(password) < 6:
-            messages.error(request, "Password Must Be At Least 6 Characters")
-            return redirect("registration")
-        
-        #Strong Password Validation
-        if password.isdigit():
-            messages.error(request, "Password Cannot Be Only Numbers")
-            return redirect("registration")
-        
-        if not username.isalnum():
-            messages.error(request, "Username Must Contain Only Letters And Numbers")
-            return  redirect('registration')
-        
-        
-        user.set_password(password)
-        user.save()
+        form = RegistrationForm(request.POST)
 
-        messages.success(request, "Accounts Successfully..!")
+        if form.is_valid():
 
-        return redirect('login')
-    return render(request, 'registration_page.html')
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            role = form.cleaned_data['role']
 
+            user = User(
+                username = username,
+                email = email,
+                role = role
+            )
+
+            user.set_password(password)
+
+            user.save()
+
+            messages.success(request, "Accounts Created Successfully")
+
+            return redirect('login')
+        
+    context = {
+        'form' : form
+    }
+
+    return render(request, 'registration_page.html',context)
 
 
 def login(request):

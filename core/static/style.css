@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#312e81);
+    overflow:hidden;
+}
+
+/* Glass Effect */
+
+.container,
+.dashboard-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.form-box,
+.dashboard-card{
+    width:420px;
+    padding:45px;
+    border-radius:25px;
+
+    background:rgba(255,255,255,0.08);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+    0 8px 32px rgba(0,0,0,0.35);
+
+    text-align:center;
+
+    color:white;
+
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.form-box h1,
+.dashboard-card h1{
+    font-size:38px;
+    margin-bottom:30px;
+    font-weight:700;
+}
+
+.dashboard-card h2{
+    margin-bottom:15px;
+    color:#38bdf8;
+}
+
+/* Inputs */
+
+.form-box input{
+    width:100%;
+    padding:15px;
+    margin-bottom:20px;
+
+    border:none;
+    outline:none;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,0.12);
+
+    color:white;
+
+    font-size:16px;
+
+    transition:0.3s;
+}
+
+.form-box input::placeholder{
+    color:#d1d5db;
+}
+
+.form-box input:focus{
+    background:rgba(255,255,255,0.18);
+    transform:scale(1.02);
+}
+
+/* Buttons */
+
+.form-box button,
+.logout-btn{
+    width:100%;
+    padding:15px;
+
+    border:none;
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#06b6d4,#3b82f6);
+
+    color:white;
+
+    font-size:17px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.form-box button:hover,
+.logout-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(59,130,246,0.4);
+}
+
+/* Links */
+
+.form-box p,
+.dashboard-card p{
+    margin-top:20px;
+    color:#e2e8f0;
+}
+
+.form-box a{
+    color:#38bdf8;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.form-box a:hover{
+    text-decoration:underline;
+}
+
+.error{
+    color:#f87171;
+    margin-top:10px;
+}
+
+/* Dashboard */
+
+.dashboard-card{
+    width:500px;
+}
+
+.logout-btn{
+    display:inline-block;
+    text-decoration:none;
+    margin-top:25px;
+}
+
+/*Extra CSS*/
+.role-select{
+    width: 300px;
+    padding: 12px 15px;
+    border: 2px solid #4f46e5;
+    border-radius: 10px;
+    background-color: #202022;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.role-select:hover{
+    border-color: #6366f1;
+}
+
+.role-select:focus{
+    box-shadow: 0 0 10px #6366f1;
+}
+
+.role-select option{
+    background-color: #1f2937;
+    color: white;
+}
+
+
+/* MESSAGE CONTAINER */
+
+.message-container{
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* ALERT BOX */
+
+.alert{
+    min-width: 320px;
+    padding: 15px 25px;
+    margin-bottom: 15px;
+
+    border-radius: 12px;
+
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+    animation: slideDown 0.5s ease;
+}
+
+/* SUCCESS */
+
+.success{
+    background: linear-gradient(
+        135deg,
+        #22c55e,
+        #16a34a
+    );
+}
+
+/* ERROR */
+
+.error{
+    background: linear-gradient(
+        135deg,
+        #ef4444,
+        #dc2626
+    );
+}
+
+/* WARNING */
+
+.warning{
+    background: linear-gradient(
+        135deg,
+        #f59e0b,
+        #d97706
+    );
+}
+
+/* ANIMATION */
+
+@keyframes slideDown{
+
+    from{
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
