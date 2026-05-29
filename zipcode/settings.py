@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'accounts',
-    'core',
+    'validation_app',
+    
+    
 ]
 
 MIDDLEWARE = [

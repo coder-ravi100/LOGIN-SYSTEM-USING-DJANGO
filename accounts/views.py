@@ -37,31 +37,7 @@ def registration(request):
                     email = email, 
                     role = role
                     )
-        #USERNAME VALIDATION
-        if len(username) > 50:
-            messages.error(request, "Username Must Be At Least 3 Characters")
-            return redirect("registration")
-    
-        #EMAIL VALIDATION
-        if User.objects.filter(email=email).exists():
-            messages.error(request,"Email Already Exists")
-            return redirect("registration")
-        
-        #PASSWORD VALIDATION
-        if len(password) < 6:
-            messages.error(request, "Password Must Be At Least 6 Characters")
-            return redirect("registration")
-        
-        #Strong Password Validation
-        if password.isdigit():
-            messages.error(request, "Password Cannot Be Only Numbers")
-            return redirect("registration")
-        
-        if not username.isalnum():
-            messages.error(request, "Username Must Contain Only Letters And Numbers")
-            return  redirect('registration')
-        
-        
+         
         user.set_password(password)
         user.save()
 
