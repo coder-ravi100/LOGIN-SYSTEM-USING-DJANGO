@@ -2,6 +2,10 @@ from django.shortcuts import render,redirect
 from .models import User
 from django.contrib import messages
 
+#Authentication Login
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+
 
 # Create your views here.
 def dashboard(request):
@@ -50,6 +54,21 @@ def registration(request):
 
 def login(request):
     if request.method == "POST":
+         # Authentication + Inbuild Function
+        # email = request.POST['email']
+        # password = request.POST['password']
+
+        # user = authenticate(request, email=email, password=password)
+        # if user is not None:
+            
+        #     login(request, user)
+        #     return redirect('dashboard')
+        # else:
+        #     messages.error(request,"Invalid Credentials")
+        
+       
+
+        #session + Manually code
         email = request.POST['email']
         password = request.POST['password']
 
